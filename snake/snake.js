@@ -41,7 +41,7 @@
 	var Snake = function(){
 		this.direction = '';
 		this.head = {x: 300, y: 200, facing: ''};
-		this.segments = [{facing: ''}, {}];
+		this.segments = [{facing: ''}];
 	};
 
 	Snake.prototype = {
@@ -70,7 +70,7 @@
 				screen.clearRect(this.segments[this.segments.length-1].x, this.segments[this.segments.length -1].y, 10, 10);
 			
 			// 3. then checks if it's colliding with something. 
-			// side note: this next part requires a decision. Should it die as soon as its head meets its tail, even if the tail is right about to get out of the way? (Should we detectCollision before we pop the tail off the end of the array?) This depends on why the snake dies upon meeting itself, and the answer to that is either axiomatic or spiritual.
+			// SIDENOTE: this next part requires a decision. Should it die as soon as its head meets its tail, even if the tail is right about to get out of the way? (Should we detectCollision before we pop the tail off the end of the array?) This depends on why the snake dies upon meeting itself, and the answer to that is either axiomatic or spiritual.
 			this.detectCollision(screen, food);
 			}
 			
@@ -114,7 +114,6 @@
 					this.reset(screen);
 			}, this);
 		}
-
 	};
 
 	// Food module handles food placement
@@ -123,14 +122,14 @@
 	};
 
 	Food.prototype = {
-		// randomly place yourself somewhere
+		// randomly places itself somewhere
 		placeRandom: function(screen){
 			this.center.x = Math.floor(Math.random() * 60) * 10;
 			this.center.y = Math.floor(Math.random() * 40) * 10;
 			screen.fillStyle = 'OliveDrab';
 			screen.fillRect(this.center.x, this.center.y, 10, 10);			
 		},
-		
+
 		reset: function(screen){
 			this.placeRandom(screen);
 		}
